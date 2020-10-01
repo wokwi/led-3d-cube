@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D LED Cube</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="led-component.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-entity
+        id="led-cube"
+        position="0 1.2 -3"
+        rotation="-90 0 0"
+        animation="property: rotation; to: -90 360 0; dur: 10000; loop: true; easing: linear"
+      ></a-entity>
+      <a-sky color="black"></a-sky>
+    </a-scene>
+    <script src="led-cube.js"></script>
+  </body>
+</html>
