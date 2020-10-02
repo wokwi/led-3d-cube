@@ -14,7 +14,7 @@
 
   AFRAME.registerComponent('led', {
     schema: {
-      color: { type: 'color', default: '#fff' },
+      color: { type: 'color', default: '#000' },
     },
 
     init() {

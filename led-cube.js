@@ -9,7 +9,13 @@
 const root = document.getElementById('led-cube');
 const pixels = [];
 
-const size = 8;
+const urlParams = new URL(location.href).searchParams;
+
+function clamp(n, min, max) {
+  return n < min ? min : n > max ? max : n;
+}
+
+const size = clamp(parseInt(urlParams.get('size'), 10), 0, 16) || 8;
 const scale = 0.2;
 let index = 0;
 const center = (scale * size) / 2;
@@ -22,23 +28,25 @@ for (let z = 0; z < size; z++) {
         y: y * scale - center,
         z: z * scale - center,
       });
-      led.setAttribute('color', 'red');
       root.appendChild(led);
       pixels[index++] = led;
     }
   }
 }
 
-const colors = ['red', '#100000', '#400', 'green', 'blue', 'black', 'white'];
-let lightIndex = 0;
-let colorIndex = 0;
-setInterval(() => {
-  pixels[lightIndex++].setAttribute('color', colors[colorIndex]);
-  if (lightIndex >= pixels.length) {
-    colorIndex++;
-    lightIndex = 0;
-    if (colorIndex >= colors.length) {
-      colorIndex = 0;
+parent.postMessage({ app: 'wokwi', command: 'listen', version: 1 }, 'https://wokwi.com');
+
+window.addEventListener('message', ({ data }) => {
+  if (data.neopixels) {
+    const { neopixels } = data;
+    for (let i = 0; i < neopixels.length; i++) {
+      const value = neopixels[i];
+      const b = value & 0xff;
+      const r = (value >> 8) & 0xff;
+      const g = (value >> 16) & 0xff;
+      if (pixels[i]) {
+        pixels[i].setAttribute('color', `rgb(${r}, ${g}, ${b})`);
+      }
     }
   }
-}, 1);
+});
