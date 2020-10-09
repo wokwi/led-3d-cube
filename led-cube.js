@@ -50,3 +50,12 @@ window.addEventListener('message', ({ data }) => {
     }
   }
 });
+
+const spinButton = document.getElementById('option-spin');
+spinButton.addEventListener('change', () => {
+  if (spinButton.checked) {
+    root.components.animation.play();
+  } else {
+    root.components.animation.pause();
+  }
+});

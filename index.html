@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>3D LED Cube</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="led-component.js"></script>
   </head>
@@ -17,6 +18,13 @@
       ></a-entity>
       <a-sky color="black"></a-sky>
     </a-scene>
+    <div class="controls">
+      <h3>Controls</h3>
+      <label>
+        <input type="checkbox" id="option-spin" checked />
+        Spin
+      </label>
+    </div>
     <script src="led-cube.js"></script>
   </body>
 </html>
